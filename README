@@ -1,0 +1,106 @@
+
+vNews
+__________________________________________
+
+vNews est un système de gestion de news facile développé en PHP. Il vous permet de créer du contenu facilement et rapidement. Personnalisable et flexible, il peut être utilisé pour un graphisme sur un site. Nomade ce système n'a nul besoin de base de données pour fonctionner.
+
+Version: 0.3
+Infos: http://www.leoche.org/vnews
+
+
+
+Comment installer vNews?
+
+
+Il vous suffit de décompresser l’archive de vNews (vNews-lastest.zip) afin d’y extraire le dossier vNews. Puis, glissez le dossier vNews à la racine de votre site web sur votre FTP.
+Enfin configurez vNews en accédant via votre site au dossier vNews (Exemple : http://votresite.fr/vNews/) suivez les quelques étapes et le tour est joué!
+
+
+
+vNews est installé, comment l’intégrer à mon site?
+
+
+Pour inclure vNews dans une page, assurez vous que son extension soit “.php” et non “.html” ou encore “.htm”. Enfin includez en php la page “news.php” qui se trouve dans le dossier vNews comme ceci <?php include(“vNews/news.php”); ?> (Dans ce cas la page php doit se trouver dans le meme répertoire que le dossier vNews).
+Exemple: J’ai installé vNews à la racine de mon site et ma page “index.php” se trouve elle aussi à la racine de mon site. Il me suffit d’éditer “index.php” pour y inclure :
+<?php include(“vNews/news.php”); ?>
+
+
+
+Comment afficher qu’une seul catégorie d’article sur une page PHP?
+
+
+Méthode par l’URL ?categorie=exemple :
+Il vous suffit de rajouter une variable GET a l’url de votre page.
+Exemple: Vous incluez vNews sur une page “macategorie.php” pour afficher la categorie qui a pour “slug” “ma-categorie” l’url est la suivante : http://votresite.fr/mapage.php?categorie=ma-categorie
+
+Méthode par variable $categorie:
+Il vous suffit de rajouter le “slug” de la catégorie dans une variable $categorie avant l’inclusion de news.php.
+Exemple: <?php $categorie = “ma-categorie”; include(“vNews/news.php”); ?>
+
+
+
+Comment afficher une page de vNews sur une page PHP?
+
+
+Méthode par l’URL ?page:
+Il vous suffit de rajouter une variable GET a l’url de votre page.
+Exemple: Vous incluez vNews sur une page “mapage.php” pour afficher la page qui a pour “slug” “ma-page” l’url est la suivante : http://votresite.fr/mapage.php?page=ma-page
+
+Méthode par variable $page:
+Il vous suffit de rajouter le “slug” de la page dans une variable $page avant l’inclusion de news.php.
+Exemple: Vous incluez vNews sur une page “mapage.php” pour afficher la page “ma-page”
+<?php $page = “ma-page”; include(“vNews/news.php”); ?>
+Il n’y a que “Pas de contenu disponible” sur ma page PHP, que se passe t’il?
+
+Dans le cas d’un listage de news:
+Assurez vous qu’il y a bien une news de postée
+Dans le cas d’un affichage d’une page:
+Vérifiez que le slug indiqué correspond bien a un slug d’une page (Les slugs sont générés automatiquement à partir du titre de la page pour connaître le slug d’una page crée, rendez-vous sur la gestion des pages de l’administration vNews colonne slug.
+
+
+
+Comment choisir le nombre de news par page?
+
+
+Tout simplement via la partie options depuis l’administration de vNews
+
+
+
+Puis-je renommer le dossier vNews à ma guise?
+
+
+Vous pouvez biensûr renommer le dossier vNews comme bon vous semble pensez cependant à adapter vos inclusions.
+Exemple: Si je renomme vNews en Toto, alors l’inclusion de vNews se ferai par :
+<?php include(“Toto/news.php”); ?> 
+
+
+
+Modifier l’aspect des news, pages ou commentaires?
+
+
+On en vient à la partie personnalisation de vNews. Le système fonctionne sous formes de thèmes que l’ont peut créer via l’administration vNews (options/gérer les thèmes). Une fois crée, votre thème comporte 4 fichiers modifiables directement sur l’administration via un éditeur à la volée :
+
+news.html : 
+Cette page représente un bloc d’une news affichée dans le listage total des news comme sur une page d’accueil ou une page de catégorie.
+Les variables à insérer sont {titre}, {auteur}, {categorie}, {nbcommentaires} et {date}.
+
+single.html : 
+Cette page représente elle aussi un bloc d’une news mais cette fois si unique c’est à dire quand une seule news est affichée. Cette page contient les commentaires qui sont attachés à la news en question.
+Les variables à insérer sont {titre}, {auteur}, {categorie}, {commentaires} et {date}.
+
+commentaire.html : 
+Cette page représente le design d’un commentaire unique.
+Les variables à insérer sont {titre}, {auteur}, {date} et {commentaire}.
+
+page.html :
+Cette page représente le bloc d’une page statique.
+Les variables à insérer sont {titre} et {contenu}.
+
+
+
+Quels droits a-t’on sur vNews?
+
+
+vNews est gratuit au téléchargement ainsi qu’à l’utilisation. Cependant vNews souscrit à la license de creative commons CC BY-NC 2.0 (cf: http://creativecommons.org ). En résumé, l’utilisation est autorisée seulement pour des fins non commerciales, toutes modifications sont autorisées mais Leoche.org se réserve le droit paternité de vNews.
+
+

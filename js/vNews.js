@@ -1,0 +1,12 @@
+$(function(){
+	$(".spoiler").next("p").hide();
+	$(".spoiler").click(function(){
+		if($(this).next("p:first").css("display")=="none"){
+			$(this).addClass("u");
+			$(this).next("p:first").slideDown();
+		}else{
+			$(this).removeClass("u");
+			$(this).next("p:first").slideUp();
+		}
+	});
+});
