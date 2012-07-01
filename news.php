@@ -70,7 +70,7 @@ foreach($data as $id=>$n){
 		foreach($coms as $id=>$k){
 			$comsfinds = array("{pseudo}","{commentaire}","{date}");
 			$comstemplate = getTheme($theme,true,"commentaires");
-			$replc = array($k['pseudo'],$k['message'],toDate($k['date']));
+			$replc = array($k['pseudo'],stripslashes($k['message']),toDate($k['date']));
 			$comstemplatee .= str_replace($comsfinds, $replc, $comstemplate);
 		}
 	}
@@ -80,7 +80,7 @@ foreach($data as $id=>$n){
 		$titre=$n['titre'];
 		$commentaires = '
 		<hr/>
-		<strong>Les Commentaires</strong><br/>
+		<strong>Les Commentaires</strong><br /><br />
 		'.$comstemplatee.'
 		<br /><br />
 		'.$errorcoms.'
@@ -88,12 +88,12 @@ foreach($data as $id=>$n){
 		<br /><br />
 		<form action="" method="post">
 		<label for="vnewspseudo">Votre Pseudo :</label><br/>
-		<input type="text" name="vnewspseudo" style="width: 96%;"/><br/>
+		<input type="text" name="vnewspseudo" class="vnews-textinput"/><br/>
 		<br/>
 		<label for="vnewsmessage">Votre Commentaire :</label><br/>
-		<textarea name="vnewsmessage" style="width: 96%;"></textarea><br/>
+		<textarea name="vnewsmessage" class="vnews-textarea"></textarea><br/>
 		<br/>
-		<input type="submit" value="Ajouter ce commentaire"/><br/>
+		<input onclick="this.value=\'Envoi en cours...\';this.disabled=true;this.form.submit();" type="submit" class="vnews-submitinput" value="Ajouter ce commentaire"/><br/>
 		</form>
 		';
 	}
@@ -122,7 +122,8 @@ foreach($data as $id=>$n){
 	echo $print;
 }
 
-}else{echo "Pas de contenu disponible.";}
+}else{
+	echo "Pas de contenu disponible.";}
 
 if(!$error404 && $is_news && !$is_one_only && $data!=null && !empty($data) && is_array($data)){
 	echo getPagination($page,$limit,$cat);

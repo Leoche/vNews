@@ -23,7 +23,6 @@ $helpers = array(
         "Catégorie"=>"{categorie}",
         ),
     "commentaires"=>array(
-        "Titre"=>"{titre}",
         "Pseudo du posteur"=>"{pseudo}",
         "Contenu du commentaire"=>"{commentaire}",
         "Date"=>"{date}",

@@ -34,6 +34,7 @@ $selected = "selected='selected'";
         <optgroup label="Rang">
         <option value="1" <?php if($r['rang'] == 1){ echo $selected;} ?>>Administrateur</option>
         <option value="2" <?php if($r['rang'] == 2){ echo $selected;} ?>>Journaliste</option>
+        <option value="3" <?php if($r['rang'] == 3){ echo $selected;} ?>>Correcteur</option>
         </optgroup>
 </select><br /><br />
     <input type="submit" value="Éditer cet administrateur"/>

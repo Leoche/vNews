@@ -306,12 +306,6 @@ function verifVersion(){
     }
     else{return 1;}
 }
-
-function is_connected($id=1){
-    if(!isset($_SESSION['Auth'])){return false;}
-    else{if($_SESSION['Auth']["rang"]!=$id){return false;}else{return true;}}
-}
-
 function debug($s){
     return "<pre>".print_r($s)."</pre>";
 }
@@ -374,5 +368,24 @@ function converttohtml($text){
 setlocale(LC_ALL, 'en_US.UTF8');
 function slug($str, $replace=array(), $delimiter='-') {
     if( !empty($replace) ) {$str = str_replace((array)$replace, ' ', $str);}$clean = iconv('UTF-8', 'ASCII//TRANSLIT', $str);$clean = preg_replace("/[^a-zA-Z0-9\/_|+ -]/", '', $clean);$clean = strtolower(trim($clean, '-'));$clean = preg_replace("/[\/_|+ -]+/", $delimiter, $clean);return $clean;
+}
+function is_mobile(){  $mobile_browser   = false;  if (stristr($_SERVER['HTTP_USER_AGENT'], "Android")|| strpos($_SERVER['HTTP_USER_AGENT'], "iPod")|| strpos($_SERVER['HTTP_USER_AGENT'], "iPhone")) { $mobile_browser = true;}  return $mobile_browser;}
+function is_connected(){if(!isset($_SESSION['Auth']["rang"])){return false;}else{return true;}}
+function is_auth($page){
+global $roles, $auths, $rolesnum;
+$page = explode("_", $page);
+if($page[0]!="admin"){return true;}
+if(!isset($_SESSION['Auth']["rang"])){return false;}
+$id = $_SESSION['Auth']["rang"];
+if(!in_array($id, $rolesnum)){return false;}
+if($auths[$id] == "*"){return true;}
+
+if(isset($auths[$id][$page[1]])){
+    if($auths[$id][$page[1]] == "*"){return true;}
+    if(isset($page[2])){
+        if(in_array($page[2],$auths[$id][$page[1]])){return true;}
+    }
+    return false;
+}else{return false;}
 }
 ?>

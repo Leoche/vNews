@@ -52,6 +52,14 @@ for($i=1;$i<25;$i++){
 </td>
 </tr>
 <!-- ////////////////////////////////////////////////// -->
+<tr class="altrow">
+<td>
+<strong>Flux RSS</strong>
+</td><td>
+<a href="index.php?page=admin_rss">Configurer le flux RSS</a>
+</td>
+</tr>
+<!-- ////////////////////////////////////////////////// -->
 </table>
 <div class="spacer"></div>
 <input type="submit" value="Enregistrer les options"/>

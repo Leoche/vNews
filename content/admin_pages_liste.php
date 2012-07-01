@@ -1,7 +1,9 @@
 <h1>Liste des pages</h1>
 <div class="spacer"></div>
+<?php if(is_auth("admin_pages_ajouter")){ ?>
 <a class="bouttona" href="index.php?page=admin_pages_ajouter">Ajouter une page</a><br/>
 <div class="spacer"></div>
+<?php } ?>
 <table>
     <thead>
         <td>Titre</td>
@@ -32,13 +34,13 @@ $re="";
 ?>
     <tr<?php echo $re; ?>>
     <td><?php echo substr($n['titre'],0,20); ?></td>
-    <td><?php echo substr(htmlspecialchars($n['contenu']),0,20)."..."; ?></td>
+    <td><?php echo substr(strip_tags($n['contenu']),0,20)."..."; ?></td>
     <td><?php echo $n['slug']; ?></td>
     <td><?php echo $n['auteur']; ?></td>
     <td><?php echo date("d/m/Y",$n['date']); $g = $n['titre'];?></td>
     <td>
         <a href="index.php?page=admin_pages_editer&id=<?php echo $id; ?>&token=<?php echo $_SESSION['Auth']['token']; ?>"><img src="css/images/edit.png" alt="Editer" /></a>
-        <a onclick="javascript:h = confirm('Voulez-vous vraiment supprimer \'\'<?php echo $n['titre']; ?>\'\'?'); if(h){return true;} else{return false;}" href="index.php?page=admin_pages_supprimer&id=<?php echo $id; ?>&token=<?php echo $_SESSION['Auth']['token']; ?>"><img src="css/images/delete.png" alt="Delete" /></a>
+        <?php if(is_auth("admin_pages_supprimer")){ ?><a onclick="javascript:h = confirm('Voulez-vous vraiment supprimer \'\'<?php echo $n['titre']; ?>\'\'?'); if(h){return true;} else{return false;}" href="index.php?page=admin_pages_supprimer&id=<?php echo $id; ?>&token=<?php echo $_SESSION['Auth']['token']; ?>"><img src="css/images/delete.png" alt="Delete" /></a><?php } ?>
     </td>
     </tr>
 <?php

@@ -3,6 +3,9 @@ if(!isset($_GET)){header("Location:index.php?page=admin_news_liste");}
 else{
 if(!isset($_GET['id'])){header("Location:index.php?page=admin_news_liste");}
 $r = readdata("dbnews",true,$_GET['id']);
+if($_SESSION['Auth']['rang']==2){
+if($r[0]['auteur'] != $_SESSION['Auth']['pseudo']){$_SESSION['error'] = "Vous n'avez pas le droit d'éditer ce post.";header("Location:index.php?page=admin_news_liste");die();}
+}
 if(isset($_POST)){
     if(!empty($_POST)){
         if(!empty($_POST['titre']) && !empty($_POST['contenu']) && !empty($_POST['token']) ){
@@ -33,9 +36,7 @@ $c = readdata("dbnewscategories");
     <div class="spacer"></div>
     <label for="titre">Contenu de la News :</label><br />
     <div class="spacer"></div>
-    <textarea class="markItUp" name="contenu"><?php echo converttobbcode($r[0]['contenu']); ?></textarea><br />
-    <div class="spacer"></div>
-    <div class="spacer"></div>
+    <textarea class="markItUp" name="contenu"><?php echo converttobbcode($r[0]['contenu']); ?></textarea>
     <label for="categorie">Catégorie de la News : </label>
     <select style="margin-left:5px" name="categorie">
     <?php
@@ -46,5 +47,6 @@ foreach($c as $id => $h){
 }
     ?>
     </select>
+    <div class="spacer"></div>
     <input type="submit" value="Éditer cette News"/>
 </form>

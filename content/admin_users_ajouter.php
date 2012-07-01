@@ -13,16 +13,17 @@ if(isset($_POST)){
 <h1>Ajouter un Utilisateur</h1>
 <form action="" method="POST">
     <input type="hidden" name="token" value="<?php echo $_SESSION['Auth']['token']; ?>"/><br />
-    <label for="titre">Pseudo de l'Utilisateur :</label><br />
-    <input type="text" name="pseudo"/><br />
-    <label for="pass">Mot de passe de l'Utilisateur :</label><br />
-    <input type="text" name="pass"/><br />
-      <label for="rang">Rang de l'Utilisateur :</label><br />
+    <label for="titre">Pseudo de l'Utilisateur :</label><div class="spacer"></div>
+    <input type="text" name="pseudo"/><div class="spacer"></div><div class="spacer"></div>
+    <label for="pass">Mot de passe de l'Utilisateur :</label><div class="spacer"></div>
+    <input type="text" name="pass"/><div class="spacer"></div><div class="spacer"></div>
+      <label for="rang">Rang de l'Utilisateur :</label><div class="spacer"></div>
     <select name="rang">
         <optgroup label="Rang">
-		<option value="1">Utilisateur</option>
-		<option value="2">Journaliste</option>
+		<option value="1">Administrateur</option>
+        <option value="2">Journaliste</option>
+        <option value="3">Correcteur</option>
         </optgroup>
-</select><br /><br />
+</select><div class="spacer"></div><div class="spacer"></div>
     <input type="submit" value="Ajouter cet Utilisateur"/>
 </form>

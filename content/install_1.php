@@ -43,7 +43,7 @@ echo "</tr>";
 echo "<tr>";
 	echo '<td>Création des variables de configuration dans "config.vnews"<td/>';
 $r["news_par_page"] = "8";
-$r["version"] = "0.3";
+$r["version"] = "0.4";
 if(savedata("config",$r)){
 	echo '<td><img src="css/images/valid.png"/></td>';
 }else{echo '<td><img src="css/images/delete.png"/></td>';}

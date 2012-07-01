@@ -8,4 +8,4 @@ Nous allons tout d'abord procédder à votre nouvelle installation de vNews. Cli
 <a class="bouttona" href="index.php?page=install_1">Commencer</a>
 </center>
 <br/>
-<i><b>vNews</b>, service de gestionnaire de News proposé par l'équipe vHabbo.org.</i>
+<i><b>vNews</b>, gestionnaire de contenu proposé par <a href="http://leoche.org">Leoche</a>.</i>

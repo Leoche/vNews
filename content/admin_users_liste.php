@@ -9,7 +9,6 @@
         <td>Action</td>
     </thead>
 <?php
-$roles = array(1=>'Administrateur',2=>'Journaliste');
 $users = readdata("dbuser");
 $i=0;
 foreach ($users as $id=>$n){

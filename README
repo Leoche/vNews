@@ -1,15 +1,15 @@
 
 vNews
-__________________________________________
+=============
 
 vNews est un système de gestion de news facile développé en PHP. Il vous permet de créer du contenu facilement et rapidement. Personnalisable et flexible, il peut être utilisé pour un graphisme sur un site. Nomade ce système n'a nul besoin de base de données pour fonctionner.
 
-Version: 0.3
+Version: 0.4
 Infos: http://www.leoche.org/vnews
 
 
 
-Comment installer vNews?
+### Comment installer vNews?
 
 
 Il vous suffit de décompresser l’archive de vNews (vNews-lastest.zip) afin d’y extraire le dossier vNews. Puis, glissez le dossier vNews à la racine de votre site web sur votre FTP.
@@ -17,7 +17,7 @@ Enfin configurez vNews en accédant via votre site au dossier vNews (Exemple : h
 
 
 
-vNews est installé, comment l’intégrer à mon site?
+### vNews est installé, comment l’intégrer à mon site?
 
 
 Pour inclure vNews dans une page, assurez vous que son extension soit “.php” et non “.html” ou encore “.htm”. Enfin includez en php la page “news.php” qui se trouve dans le dossier vNews comme ceci <?php include(“vNews/news.php”); ?> (Dans ce cas la page php doit se trouver dans le meme répertoire que le dossier vNews).
@@ -26,7 +26,7 @@ Exemple: J’ai installé vNews à la racine de mon site et ma page “index.php
 
 
 
-Comment afficher qu’une seul catégorie d’article sur une page PHP?
+### Comment afficher qu’une seul catégorie d’article sur une page PHP?
 
 
 Méthode par l’URL ?categorie=exemple :
@@ -39,7 +39,7 @@ Exemple: <?php $categorie = “ma-categorie”; include(“vNews/news.php”); ?
 
 
 
-Comment afficher une page de vNews sur une page PHP?
+### Comment afficher une page de vNews sur une page PHP?
 
 
 Méthode par l’URL ?page:
@@ -59,14 +59,14 @@ Vérifiez que le slug indiqué correspond bien a un slug d’une page (Les slugs
 
 
 
-Comment choisir le nombre de news par page?
+### Comment choisir le nombre de news par page?
 
 
 Tout simplement via la partie options depuis l’administration de vNews
 
 
 
-Puis-je renommer le dossier vNews à ma guise?
+### Puis-je renommer le dossier vNews à ma guise?
 
 
 Vous pouvez biensûr renommer le dossier vNews comme bon vous semble pensez cependant à adapter vos inclusions.
@@ -75,7 +75,7 @@ Exemple: Si je renomme vNews en Toto, alors l’inclusion de vNews se ferai par 
 
 
 
-Modifier l’aspect des news, pages ou commentaires?
+### Modifier l’aspect des news, pages ou commentaires?
 
 
 On en vient à la partie personnalisation de vNews. Le système fonctionne sous formes de thèmes que l’ont peut créer via l’administration vNews (options/gérer les thèmes). Une fois crée, votre thème comporte 4 fichiers modifiables directement sur l’administration via un éditeur à la volée :
@@ -98,7 +98,7 @@ Les variables à insérer sont {titre} et {contenu}.
 
 
 
-Quels droits a-t’on sur vNews?
+### Quels droits a-t’on sur vNews?
 
 
 vNews est gratuit au téléchargement ainsi qu’à l’utilisation. Cependant vNews souscrit à la license de creative commons CC BY-NC 2.0 (cf: http://creativecommons.org ). En résumé, l’utilisation est autorisée seulement pour des fins non commerciales, toutes modifications sont autorisées mais Leoche.org se réserve le droit paternité de vNews.

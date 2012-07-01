@@ -1,31 +1,23 @@
 <?php
 session_start();
+include "variables.php";
 include "functions.php";
 $version_for_layout = "";
 $installed=true;
 if(is_install()){
-$version_for_layout = getVersion();
-if(!isset($_GET['page']) || empty($_GET['page'])){
-    if(is_connected()){
-        $_GET['page']="admin_home";  
-    }
-    else{ $_GET['page']="home";  }
-}
-if(!file_exists("content/".htmlspecialchars($_GET['page']).".php")){ $_GET['page']="404"; }
-if(substr($_GET['page'],0,5)=="admin"){
-		if(substr($_GET['page'],0,10)=="admin_news" || substr($_GET['page'],0,10)=="admin_home"){
-		    if(!is_connected() && !is_connected(2)){
-		        $error = "Vous n'avez pas acces ? cette page, veuillez vous connecter.";
-		        header("Location:index.php?page=home");
-		    }
-		}
-		else{
-		    if(!is_connected()){
-		        if(is_connected(2)){header("Location:index.php?page=admin_home");}
-		        else{header("Location:index.php?page=home");}
-			}
-		}
-}
+	$version_for_layout = getVersion();
+	if(!isset($_GET['page']) || empty($_GET['page'])){
+	    if(is_connected()){
+	        $_GET['page']="admin_home";  
+	    }
+	    else{ $_GET['page']="home";  }
+	}
+	if(!file_exists("content/".htmlspecialchars($_GET['page']).".php")){ $_GET['page']="404"; }
+	if(!is_auth($_GET['page'])){
+		$_SESSION["error"] = "Vous n'avez pas accès à cette page.";
+	    if(is_connected()){header("Location:index.php?page=admin_home");die();}
+	    else{header("Location:index.php?page=home");die();}
+	}
 }
 else{
 	$installed=false;
@@ -38,16 +30,16 @@ else{
 		}
 	}
 }
-if(is_connected() && !is_connected(2)){
-if(verifVersion()!=1){$message = verifVersion();}
+if(is_auth("admin_verifVersion")){
+if(verifVersion()!=1){$_SESSION["message"] = verifVersion();}
 }
  ob_start();
  $filetoinclude = "content/".$_GET['page'].".php";
  if(file_exists($filetoinclude)){
 include $filetoinclude;
 }
-else{ $error="Votre installation manque de fichier, vNews n'arrive pas à trouver le fichier ".$_GET['page'].".php";}
+else{ $_SESSION['error']="Votre installation manque de fichier, vNews n'arrive pas à trouver le fichier ".$_GET['page'].".php";}
 $content_for_layout = ob_get_contents();
 ob_end_clean();
-include "template.php";
+if(is_mobile()){include "mobile.php";}else{include "template.php";}
 ?>

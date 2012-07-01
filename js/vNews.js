@@ -1,12 +1,12 @@
 $(function(){
-	$(".spoiler").next("p").hide();
+	$(".spoiler").next(".hide").hide();
 	$(".spoiler").click(function(){
-		if($(this).next("p:first").css("display")=="none"){
+		if($(this).next(".hide:first").css("display")=="none"){
 			$(this).addClass("u");
-			$(this).next("p:first").slideDown();
+			$(this).next(".hide:first").slideDown();
 		}else{
 			$(this).removeClass("u");
-			$(this).next("p:first").slideUp();
+			$(this).next(".hide:first").slideUp();
 		}
 	});
 });
