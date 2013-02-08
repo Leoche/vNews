@@ -22,11 +22,11 @@
 .CodeMirror-gutter-text {
   color: #aaa;
   text-align: right;
-  padding: .4em .2em .4em .4em;
+  padding: 10px 15px;
   white-space: pre !important;
 }
 .CodeMirror-lines {
-  padding: 10px 15px;
+  padding: 10px 5px 10px 15px;
 }
 
 .CodeMirror pre {

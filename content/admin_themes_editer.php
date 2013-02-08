@@ -1,9 +1,9 @@
 <?php
 $ids = array(
-    "news"=>"template",
-    "single"=>"template",
-    "commentaires"=>"template",
-    "page"=>"template",
+    "news"=>"f",
+    "single"=>"f",
+    "commentaires"=>"f",
+    "page"=>"f",
     );
 $helpers = array(
     "news"=>array(
@@ -11,6 +11,7 @@ $helpers = array(
         "Auteur"=>"{auteur}",
         "Contenu"=>"{contenu}",
         "Date"=>"{date}",
+        "Url de la News"=>"{url}",
         "Nombres de commentaires"=>"{nbcommentaires}",
         "Catégorie"=>"{categorie}",
         ),
@@ -21,6 +22,9 @@ $helpers = array(
         "Date"=>"{date}",
         "Commentaires"=>"{commentaires}",
         "Catégorie"=>"{categorie}",
+        "Facebook: J'aime"=>"{like}",
+        "Twitter: Tweet"=>"{tweet}",
+        "Google: +1"=>"{+1}",
         ),
     "commentaires"=>array(
         "Pseudo du posteur"=>"{pseudo}",
@@ -30,6 +34,9 @@ $helpers = array(
     "page"=>array(
         "Titre"=>"{titre}",
         "Contenu"=>"{contenu}",
+        "Facebook: J'aime"=>"{like}",
+        "Twitter: Tweet"=>"{tweet}",
+        "Google: +1"=>"{+1}",
         ),
     );
 if(!isset($_GET["theme"])){
@@ -39,7 +46,7 @@ if(!isset($_GET["theme"])){
 }
 if(isset($_GET["pagetoedit"])){
     $pagetoedit = $_GET["pagetoedit"];
-    $ids[$_GET["pagetoedit"]]="templateonedit";
+    $ids[$_GET["pagetoedit"]]="F";
 }else{
 $pagetoedit = "";
 }
@@ -78,36 +85,44 @@ $(function(){
 </script>
 <h1>Edition de page.html</h1>
 <br/>
-<?php if($pagetoedit!="news"){ ?><a href="index.php?page=admin_themes_editer&theme=<?php echo $_GET['theme'] ?>&pagetoedit=news"><?php } ?>
 <div class="boutton-block">
-    <div class="boutton" id="<?php echo $ids['news']; ?>"></div>
+    <div class="boutton">
+<?php if($pagetoedit!="news"){ ?><a href="index.php?page=admin_themes_editer&theme=<?php echo $_GET['theme'] ?>&pagetoedit=news"><?php } ?>
+        <div class="icon big"><?php echo $ids['news']; ?></div>
+<?php if($pagetoedit!="news"){ ?></a><?php } ?>
+    </div>
     <span>news.html</span>
 </div>
-<?php if($pagetoedit!="news"){ ?></a><?php } ?>
 
 
-<?php if($pagetoedit!="single"){ ?><a href="index.php?page=admin_themes_editer&theme=<?php echo $_GET['theme'] ?>&pagetoedit=single"><?php } ?>
 <div class="boutton-block">
-    <div class="boutton" id="<?php echo $ids['single']; ?>"></div>
+    <div class="boutton">
+<?php if($pagetoedit!="single"){ ?><a href="index.php?page=admin_themes_editer&theme=<?php echo $_GET['theme'] ?>&pagetoedit=single"><?php } ?>
+        <div class="icon big"><?php echo $ids['single']; ?></div>
+<?php if($pagetoedit!="single"){ ?></a><?php } ?>
+    </div>
     <span>single.html</span>
 </div>
-<?php if($pagetoedit!="single"){ ?></a><?php } ?>
 
 
-<?php if($pagetoedit!="commentaires"){ ?><a href="index.php?page=admin_themes_editer&theme=<?php echo $_GET['theme'] ?>&pagetoedit=commentaires"><?php } ?>
 <div class="boutton-block">
-    <div class="boutton" id="<?php echo $ids['commentaires']; ?>"></div>
+    <div class="boutton">
+<?php if($pagetoedit!="commentaires"){ ?><a href="index.php?page=admin_themes_editer&theme=<?php echo $_GET['theme'] ?>&pagetoedit=commentaires"><?php } ?>
+        <div class="icon big"><?php echo $ids['commentaires']; ?></div>
+<?php if($pagetoedit!="commentaires"){ ?></a><?php } ?>
+    </div>
     <span>commentaires.html</span>
 </div>
-<?php if($pagetoedit!="commentaires"){ ?></a><?php } ?>
 
 
-<?php if($pagetoedit!="page"){ ?><a href="index.php?page=admin_themes_editer&theme=<?php echo $_GET['theme'] ?>&pagetoedit=page"><?php } ?>
 <div class="boutton-block">
-    <div class="boutton" id="<?php echo $ids['page']; ?>"></div>
+    <div class="boutton">
+<?php if($pagetoedit!="page"){ ?><a href="index.php?page=admin_themes_editer&theme=<?php echo $_GET['theme'] ?>&pagetoedit=page"><?php } ?>
+        <div class="icon big"><?php echo $ids['page']; ?></div>
+<?php if($pagetoedit!="page"){ ?></a><?php } ?>
+    </div>
     <span>page.html</span>
 </div>
-<?php if($pagetoedit!="page"){ ?></a><?php } ?>
 <div class="clear"></div>
 <?php if(isset($_GET['pagetoedit'])){
 ?>
@@ -125,7 +140,7 @@ $contents = fread($file, filesize($dir));
 <b>Variables à insérer:</b></br>
 <?php
 foreach($helpers[$_GET['pagetoedit']] as $k=>$r){
-    echo '<a class="bouttona nohref" onClick="editor.setValue(editor.getValue()+\''.$r.'\');editor.save();changed=true;">'.$k.'</a><div class="separe-button"></div>';
+    echo '<a class="bouttona nohref" onClick="editor.replaceSelection(\''.$r.'\');editor.save();changed=true;">'.$k.'</a><div class="separe-button"></div>';
 }
 ?>
 <br />

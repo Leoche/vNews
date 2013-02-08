@@ -49,6 +49,29 @@ Les variables à insérer sont {titre}, {auteur}, {date} et {commentaire}.<br />
 <u>page.html :</u><br />
 Cette page représente le bloc d’une page statique.<br />
 Les variables à insérer sont {titre} et {contenu}.</div><br />
+
+<span class='spoiler'>Comment ajouter un bouton "Lire la news"?</span><div class="hide"><br />
+Depuis la version 0.5 de vNews, une nouvelle balise est apparue dans l'édition des thèmes dans le fichier news.html qui est <strong>{url}</strong>.<br/>
+Cette balise affiche l'url qui mène vers la news ainsi pour créer un lien "Lire la news" ou encore "Lire plus..." il vous suffira d'ajouter dans le news.html : <br/>
+<pre>&lt;a href="{url}" title="lien vers une news">Lire la news&lt;/a></pre>	
+</div><br />
+
+<span class='spoiler'>Comment désactiver la pagination?</span><div class="hide"><br />
+Ajoutez simplement <pre>$pagination = false;</pre> avant l'include de vNews. Ce qui devrait ressembler à :<br/>
+<pre>&lt;?php
+$pagination = false;
+include(“vNews/news.php”);
+?></pre>	
+</div><br />
+
+<span class='spoiler'>Comment changer de thème selon la page?</span><div class="hide"><br />
+Ajoutez le nom du thème à utiliser pour la page <pre>$theme = "montheme";</pre> avant l'include de vNews. Ce qui devrait ressembler à :<br/>
+<pre>&lt;?php
+$theme = "montheme";
+include(“vNews/news.php”);
+?></pre>	
+</div><br />
+
 <span class='spoiler'>Quels droits a-t’on sur vNews?</span><div class="hide"><br />vNews est gratuit au téléchargement ainsi qu’à l’utilisation. Cependant vNews souscrit à la license de creative commons CC BY-NC 2.0 (cf: http://creativecommons.org ). En résumé, l’utilisation est autorisée seulement pour des fins non commerciales, toutes modifications sont autorisées mais Leoche.org se réserve le droit paternité de vNews.</div>
 <div class="spacer"></div><div class="spacer"></div>
 <h1>Contributeurs</h1>

@@ -10,7 +10,7 @@
 // Feel free to add more tags
 // ----------------------------------------------------------------------------
 mySettings = {
-	previewParserPath:	'', // path to your BBCode parser
+	previewParserPath:	'~/parser.php', // path to your BBCode parser
 	markupSet: [
 		{name:'Bold', key:'B', openWith:'[b]', closeWith:'[/b]'},
 		{name:'Italic', key:'I', openWith:'[i]', closeWith:'[/i]'},
@@ -60,6 +60,6 @@ mySettings = {
 		{name:'Html', openWith:'[html]', closeWith:'[/html]'}, 
 		{separator:'---------------' },
 		{name:'Clean', className:"clean", replaceWith:function(markitup) { return markitup.selection.replace(/\[(.*?)\]/g, "") } },
-		{name:'Clean', className:"uploader", replaceWith:function(markitup) {window.open("http://www.vupload.tonsite.biz/?small","nom_popup","menubar=no, status=no, scrollbars=no, menubar=no, width=500, height=400");} }
+		{name:'Preview', className:"preview", call:'preview' }
 	]
 }

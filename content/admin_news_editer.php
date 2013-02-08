@@ -2,7 +2,7 @@
 if(!isset($_GET)){header("Location:index.php?page=admin_news_liste");}
 else{
 if(!isset($_GET['id'])){header("Location:index.php?page=admin_news_liste");}
-$r = readdata("dbnews",true,$_GET['id']);
+$r = readdata("dbnews",true,$_GET['id'],"date",null,false,null,1,10000000000,10000000000,true);
 if($_SESSION['Auth']['rang']==2){
 if($r[0]['auteur'] != $_SESSION['Auth']['pseudo']){$_SESSION['error'] = "Vous n'avez pas le droit d'éditer ce post.";header("Location:index.php?page=admin_news_liste");die();}
 }
@@ -15,6 +15,7 @@ if(isset($_POST)){
                 $z["auteur"] = $r[0]['auteur'];
                 $z["categorie"] = $_POST['categorie'];
                 $z["date"] = $r[0]['date'];
+                $z["online"] = (isset($_POST['publier']))?1:0;
                 $z["contenu"] = converttohtml($_POST['contenu']);
                 replacedatawithdatafromid("dbnews",$z,$_GET['id']);
                 header("Location:index.php?page=admin_news_liste");
@@ -37,6 +38,8 @@ $c = readdata("dbnewscategories");
     <label for="titre">Contenu de la News :</label><br />
     <div class="spacer"></div>
     <textarea class="markItUp" name="contenu"><?php echo converttobbcode($r[0]['contenu']); ?></textarea>
+    <div class="spacer"></div>
+    <span class="left" >
     <label for="categorie">Catégorie de la News : </label>
     <select style="margin-left:5px" name="categorie">
     <?php
@@ -47,6 +50,11 @@ foreach($c as $id => $h){
 }
     ?>
     </select>
+    </span>
+    <input class="right checkbox" type="checkbox" <?php if($r[0]['online']==1) echo 'checked="checked"'; ?> name="publier" id="publier" value="1"/>
+    <label for="publier" class="right">Publier cette news</label>
+    <div class="clear"></div>
+    <div class="spacer"></div>
     <div class="spacer"></div>
     <input type="submit" value="Éditer cette News"/>
 </form>

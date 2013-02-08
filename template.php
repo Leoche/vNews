@@ -4,13 +4,44 @@
 <head>
     <title>vNews</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu|Rokkitt|Oswald|Open+Sans' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
+    <script src="js/jQuery.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/markitup/jquery.markitup.js"></script>
     <script type="text/javascript" src="js/markitup/sets/bbcode/set.js"></script>
     <link rel="stylesheet" type="text/css" href="js/markitup/skins/simple/style.css" />
 	<link rel="stylesheet" type="text/css" href="js/markitup/sets/bbcode/style.css" />
-	<script type="text/javascript" >$(document).ready(function() {$(".errorflash,.messageflash").hide().slideDown().delay(3000).slideUp();$(".markItUp").markItUp(mySettings);});</script>
+	<script type="text/javascript" >
+	$(document).ready(function() {
+		var rgx = new RegExp("(?:; )?vnewstheme=black;?");
+ 		if(rgx.test(document.cookie)){
+	        $("body").toggleClass("black");
+	        $(".bouttonthm#black,.bouttonthm#white").toggleClass("active");
+	    }
+		$(".errorflash,.messageflash").css({top:-60}).animate({top:10}).animate({top:10}).delay(3000).animate({top:-60});
+		$(".errorflash,.messageflash").clearQueue().hover(function(){$(".errorflash,.messageflash").animate({top:-60},"fast")});
+		$(".markItUp").markItUp(mySettings);
+		$("#themeschoice").hide();
+		$('#thmsettings').click(function(){$("#themeschoice").slideToggle();});
+		$(".bouttonthm").click(function(){
+			var curthm = "white";
+			var rgx = new RegExp("(?:; )?vnewstheme=([^;]*);?");
+ 			if(rgx.test(document.cookie)){
+	            curthm = decodeURIComponent(RegExp["$1"]);
+	        }
+	        console.log(curthm);
+	        console.log($(this).attr("id"));
+	        if(curthm==$(this).attr("id"))
+	        	return;
+	        $("body").toggleClass("black");
+	        $(".bouttonthm#black,.bouttonthm#white").toggleClass("active");
+	        if(!$("body").hasClass("black"))
+	        	document.cookie = 'vnewstheme=white; expires=Mon, 1 Mar 2020 00:00:00 UTC; path=/';
+	        else
+	        	document.cookie = 'vnewstheme=black; expires=Mon, 1 Mar 2020 00:00:00 UTC; path=/'
+		})
+	});
+	</script>
 </head>
 <body>
 <div class="light"></div>
@@ -34,16 +65,15 @@ if($installed && $_GET['page']!="login"){
 <?php } ?>
 <?php } ?>
 <div class="clear" style="height:5px;width:100%;"></div>
-<div id="block-h"></div>
-<div id="block-m">
+<div id="block">
+<div id="settings">
+	<div id="themeschoice"><a id="white" class="icon bouttonthm active">t</a><a id="black" class="icon bouttonthm">t</a></div><a id="thmsettings" class="icon">S</a></div>
+<?php echo $content_for_layout;?>
+</div>
+<div id="footer">vNews <?php echo $version_for_layout; ?></div>
+</div>
 <?php 
 if(isset($_SESSION["error"])){echo '<span class="errorflash">'.$_SESSION["error"].'</span>';unset($_SESSION['error']);} ?>
 <?php if(isset($_SESSION["message"])){echo '<span class="messageflash">'.$_SESSION["message"].'</span>';unset($_SESSION['message']);};?>
-<?php echo $content_for_layout;?>
-</div>
-<div id="block-b"></div>
-<center>vNews <?php echo $version_for_layout; ?>
-</center>
-</div>
 </body>
 </html>

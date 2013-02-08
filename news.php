@@ -1,8 +1,10 @@
 <?php
+session_start();
 include "functions.php";
 
 $config = readdata("config",true,null,null,null,true);
-$theme = $config['theme'];
+if(!isset($theme) || theme_exist($theme))
+	$theme = $config['theme'];
 $limit = $config['news_par_page'];
 $is_one_only=false;
 $is_news=true;
@@ -14,17 +16,19 @@ $comstemplatee = "";
 $errorcoms="";
 $template = "";
 $error404 = false;
+$socials= array(false,false,false);
 echo '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script><script src="'.getFolder().'/js/vNews.js" type="text/javascript"></script>';
-if(isset($_POST["vnewspseudo"]) && isset($_POST["vnewsmessage"])){
 
+if(isset($_POST["vnewspseudo"]) && isset($_POST["vnewsmessage"]) && isset($_POST["vnewscaptcha"])){
 	$_POST["vnewspseudo"] = htmlspecialchars($_POST["vnewspseudo"]);
 	$_POST["vnewsmessage"] = htmlspecialchars($_POST["vnewsmessage"]);
 	if(strlen($_POST["vnewspseudo"])<2 || strlen($_POST["vnewspseudo"])>48){$errorcoms = "Votre pseudo est invalide.";}
 	if(strlen($_POST["vnewsmessage"])>500){$errorcoms = "Votre commentaire est trop long.";}
+	if($_POST["vnewscaptcha"]!=$_SESSION["vnewscaptcha"]){$errorcoms = "Le code n'est pas valide.";}
 	$j = array();$j["pseudo"]=$_POST["vnewspseudo"];$j["message"]=$_POST["vnewsmessage"];$j["news_id"]=$_GET['news'];$j["date"]=time();
 	if($errorcoms == ""){savedatawithdata("dbcoms",$j,true,true);}
 }
-//echo var_dump(pages_exist($_GET['page'],true));
+
 /* TRAITEMENT VARIABLES*/
 if(isset($_GET['page'])){
 	if(!is_numeric($_GET['page'])){
@@ -38,6 +42,7 @@ if(isset($_GET['page'])){
 	
 if($is_news){
 	if(isset($_GET['categorie'])){$cat = $_GET['categorie'];}else{$cat = 10000000000;}
+	if(isset($categorie)){$cat = $categorie;}else{$cat = 10000000000;}
 	if(isset($_GET['news']) && is_numeric($_GET['news'])){ if(news_exist($_GET['news'],true)){$id=$_GET['news'];$is_one_only=true;}else{$error404 = true;}}
 
 	if($is_one_only){
@@ -58,7 +63,7 @@ if(!$error404 && $data!=null && !empty($data) && is_array($data)){
 
 
 foreach($data as $id=>$n){
-	$finds = array("{titre}","{contenu}","{date}","{auteur}","{categorie}","{nbcommentaires}","{commentaires}");
+	$finds = array("{titre}","{contenu}","{date}","{auteur}","{categorie}","{url}","{tweet}","{like}","{+1}","{nbcommentaires}","{commentaires}");
 	$commentaires=null;
 	$nbcommentaires=null;
 
@@ -70,7 +75,7 @@ foreach($data as $id=>$n){
 		foreach($coms as $id=>$k){
 			$comsfinds = array("{pseudo}","{commentaire}","{date}");
 			$comstemplate = getTheme($theme,true,"commentaires");
-			$replc = array($k['pseudo'],stripslashes($k['message']),toDate($k['date']));
+			$replc = array($k['pseudo'],stripslashes($k['message']),toDate($k['date'],$config));
 			$comstemplatee .= str_replace($comsfinds, $replc, $comstemplate);
 		}
 	}
@@ -92,7 +97,11 @@ foreach($data as $id=>$n){
 		<br/>
 		<label for="vnewsmessage">Votre Commentaire :</label><br/>
 		<textarea name="vnewsmessage" class="vnews-textarea"></textarea><br/>
-		<br/>
+		<br />
+		<label for="vnewscaptcha">Recopier le code :</label><br/>
+		<img style="float:left;" src="'.getFolder().'/captcha.php" alt="captcha" />
+		<input type="text" name="vnewscaptcha" id="vnewscaptcha" class="vnews-textinput"/>
+		<br/><br/>
 		<input onclick="this.value=\'Envoi en cours...\';this.disabled=true;this.form.submit();" type="submit" class="vnews-submitinput" value="Ajouter ce commentaire"/><br/>
 		</form>
 		';
@@ -110,22 +119,31 @@ foreach($data as $id=>$n){
 
 
 	/* RENDER */
+	$Curl = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ;
 	$print = $template;
+	
+	if(preg_match("/\{tweet\}/i", $template))
+		echo getSocialScript("twitter");
+	if(preg_match("/\{like\}/i", $template))
+		echo getSocialScript("facebook");
+	if(preg_match("/\{\+1\}/i", $template))
+		echo getSocialScript("google");
+	
 	if($is_news){
-	$repl = array($titre,stripslashes($n['contenu']),toDate($n['date']),$n['auteur'],getCatname($n['categorie'],true),$nbcommentaires,$commentaires);
+	$repl = array($titre,stripslashes($n['contenu']),toDate($n['date'],$config),$n['auteur'],getCatname($n['categorie'],true),'?news='.$id,getSocialButton("twitter",$n['titre'],$Curl),getSocialButton("facebook",$n['titre'],$Curl),getSocialButton("google",$n['titre'],$Curl),$nbcommentaires,$commentaires);
 	}
 	if($is_page){
-	$repl = array($titre,stripslashes($n['contenu']),"",$n['auteur'],"","","");
+	$repl = array($titre,stripslashes($n['contenu']),"",$n['auteur'],"","",getSocialButton("twitter",$n['titre'],$Curl),getSocialButton("facebook",$n['titre'],$Curl),getSocialButton("google",$n['titre'],$Curl),"","");
 	}
 
 	$print = str_replace($finds, $repl, $print);
 	echo $print;
+	
 }
 
 }else{
 	echo "Pas de contenu disponible.";}
-
-if(!$error404 && $is_news && !$is_one_only && $data!=null && !empty($data) && is_array($data)){
+if(!(isset($pagination) && $pagination==false) && (!$error404 && $is_news && !$is_one_only && $data!=null && !empty($data) && is_array($data))){
 	echo getPagination($page,$limit,$cat);
 }
 $errorcoms = "";

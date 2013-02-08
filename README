@@ -4,7 +4,7 @@ vNews
 
 vNews est un système de gestion de news facile développé en PHP. Il vous permet de créer du contenu facilement et rapidement. Personnalisable et flexible, il peut être utilisé pour un graphisme sur un site. Nomade ce système n'a nul besoin de base de données pour fonctionner.
 
-Version: 0.4
+Version: 0.5
 Infos: http://www.leoche.org/vnews
 
 
@@ -95,6 +95,39 @@ Les variables à insérer sont {titre}, {auteur}, {date} et {commentaire}.
 page.html :
 Cette page représente le bloc d’une page statique.
 Les variables à insérer sont {titre} et {contenu}.
+
+
+
+### Comment ajouter un bouton "Lire la news"?
+
+
+Depuis la version 0.5 de vNews, une nouvelle balise est apparue dans l'édition des thèmes dans le fichier news.html qui est {url}.
+Cette balise affiche l'url qui mène vers la news ainsi pour créer un lien "Lire la news" ou encore "Lire plus..." il vous suffira d'ajouter dans le news.html : 
+<a href="{url}" title="lien vers une news">Lire la news&lt;/a>
+
+
+
+### Comment désactiver la pagination?
+
+
+Ajoutez simplement $pagination = false; avant l'include de vNews. Ce qui devrait ressembler à :
+<?php
+$pagination = false;
+include(“vNews/news.php”);
+?>
+
+
+
+### Comment changer de thème selon la page?
+
+
+Ajoutez le nom du thème à utiliser pour la page 
+$theme = "montheme"; 
+avant l'include de vNews. Ce qui devrait ressembler à :
+<php
+$theme = "montheme";
+include(“vNews/news.php”);
+?>
 
 
 

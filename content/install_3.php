@@ -1,4 +1,4 @@
-<h1>Finalisation 3/3</h1>
+<h1>Fini, vous étiez parfait! 3/3</h1>
 <div class="spacer"></div>
 <?php
     $r = readdata("config");

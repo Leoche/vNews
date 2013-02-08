@@ -1,11 +1,6 @@
-Bonjour et bienvenue au gestionnaire de News "<b>vNews</b>", ce système vous permettras de gérer du contenu pour chacun de vos sites en quelques cliques et tout ça pour votre plus grand bonheur.
+<h1>Bienvenue sur votre vNews!</h1>
 <br/>
+<p>Nous allons tout d'abord procéder à votre installation de vNews. Ce gestionnaire de contenu vous est proposé gratuitement par <a href="http://leoche.org">Leoche</a>.<br/>Cliquez sur Commencer pour continuer.</p>
 <br/>
-Nous allons tout d'abord procédder à votre nouvelle installation de vNews. Cliquez sur Commencer pour continuer.
-<br/>
-<br/>
-<center>
-<a class="bouttona" href="index.php?page=install_1">Commencer</a>
-</center>
-<br/>
-<i><b>vNews</b>, gestionnaire de contenu proposé par <a href="http://leoche.org">Leoche</a>.</i>
+<a class="bouttona big" href="index.php?page=install_1">Commencer</a>
+<div class="clear"></div>

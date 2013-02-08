@@ -23,6 +23,7 @@ if(isset($_POST)){
 		<option value="1">Administrateur</option>
         <option value="2">Journaliste</option>
         <option value="3">Correcteur</option>
+        <option value="4">Moderateur</option>
         </optgroup>
 </select><div class="spacer"></div><div class="spacer"></div>
     <input type="submit" value="Ajouter cet Utilisateur"/>

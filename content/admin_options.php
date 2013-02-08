@@ -25,7 +25,7 @@ if(isset($_POST)){
 <form action="" method="post">
 <input type="hidden" name="token" value="<?php echo $_SESSION['Auth']['token']; ?>"/>
 <table>
-<!-- ////////////////////////////////////////////////// -->
+
 <tr class="altrow">
 <td>
 <strong>Thèmes</strong>
@@ -33,7 +33,6 @@ if(isset($_POST)){
 <a href="index.php?page=admin_themes">Gerer les thèmes</a>
 </td>
 </tr>
-<!-- ////////////////////////////////////////////////// -->
 
 <tr>
 <td>
@@ -51,8 +50,16 @@ for($i=1;$i<25;$i++){
 </select>
 </td>
 </tr>
-<!-- ////////////////////////////////////////////////// -->
+    
 <tr class="altrow">
+<td>
+<strong>Format des dates</strong>
+</td><td>
+<a href="index.php?page=admin_options_dates">Modifier</a>
+</td>
+</tr>
+
+<tr>
 <td>
 <strong>Flux RSS</strong>
 </td><td>

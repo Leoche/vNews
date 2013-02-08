@@ -8,6 +8,7 @@ if(isset($_POST)){
                 $z["auteur"] = $_SESSION['Auth']['pseudo'];
                 $z["categorie"] = $_POST['categorie'];
                 $z["date"] = time();
+                $z["online"] = (isset($_POST['publier']))?1:0;
                 $z["contenu"] = converttohtml($_POST['contenu']);
                 savedatawithdata("dbnews",$z);
                 header("Location:index.php?page=admin_news_liste");
@@ -27,6 +28,7 @@ $c = readdata("dbnewscategories");
     <label for="contenu">Contenu de la News :</label><br /><div class="spacer"></div>
     <textarea class="markItUp" name="contenu"></textarea><br />
     <div class="spacer"></div>
+    <span class="left" >
     <label for="categorie">Catégorie de la News : </label>
     <select style="margin-left:5px" name="categorie">
     <?php
@@ -35,6 +37,10 @@ foreach($c as $id => $h){
 }
     ?>
     </select>
+    </span>
+    <input class="right checkbox" type="checkbox" name="publier" id="publier" value="1"/>
+    <label for="publier" class="right">Publier cette news</label>
+    <div class="clear"></div>
     <div class="spacer"></div>
     <div class="spacer"></div>
     <input type="submit" value="Ajouter cette News"/>

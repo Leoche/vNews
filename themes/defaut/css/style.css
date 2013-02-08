@@ -12,3 +12,4 @@
 .vnews-submitinput{color:#666;text-shadow: 0px 1px 0px #FFF;cursor:pointer;box-shadow: inset 0px 1px 0px 0px #FFFFFF;-moz-box-shadow: inset 0px 1px 0px 0px #FFFFFF;-webkit-box-shadow: inset 0px 1px 0px 0px #FFFFFF;background:#EEE;}
 .vnews-submitinput:hover{background:#F5F5F5;}
 .vnews-submitinput:active{background:#DDD;box-shadow: inset 0px 1px 0px 0px #CCC;-moz-box-shadow: inset 0px 1px 0px 0px #CCC;-webkit-box-shadow: inset 0px 1px 0px 0px #CCC;}
+#vnewscaptcha{width: 20%;margin-left: 10px;}

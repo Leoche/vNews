@@ -8,7 +8,7 @@ Votre version est à la dernière version.
 }
 else{
 ?>
-Votre version n'est pas à jour vous pourrez vous diriger vers notre site : <a href="http://www.vHabbo.org">vHabbo.org</a>
+Votre version n'est pas à jour vous pourrez vous diriger vers notre site : <a href="http://www.Leoche.org/vNews">Leoche.org/vNews</a>
 <?php
 }
 ?>

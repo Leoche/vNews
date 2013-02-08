@@ -4,6 +4,7 @@
 <div class="spacer"></div>
 <table>
     <thead>
+        <td><input id="checkall" type="checkbox" onchange="javascript:checkAll();" /></td>
         <td>Date</td>
         <td>Auteur</td>
         <td>Message</td>
@@ -24,11 +25,12 @@ $re="";
         if(!$no){
 ?>
     <tr<?php echo $re; ?>>
+    <td><input type="checkbox" class="comcheck" value="<?php echo $id; ?>" /></td>
     <td><?php echo date("d/m/Y",$n['date']); ?></td>
     <td><?php echo $n['pseudo']; ?></td>
     <td><?php echo $n['message']; ?></td>
     <td>
-        <a onclick="javascript:h = confirm('Voulez-vous vraiment supprimer \'<?php echo $n['pseudo']; ?>\'?'); if(h){return true;} else{return false;}" href="index.php?page=admin_coms_supprimer&id=<?php echo $id; ?>&token=<?php echo $_SESSION['Auth']['token']; ?>"><img src="css/images/delete.png" alt="Delete" /></a>
+        <a onclick="javascript:h = confirm('Voulez-vous vraiment supprimer \'<?php echo $n['pseudo']; ?>\'?'); if(h){return true;} else{return false;}" href="index.php?page=admin_coms_supprimer&id=<?php echo $id; ?>;&token=<?php echo $_SESSION['Auth']['token']; ?>"><img src="css/images/delete.png" alt="Delete" /></a>
     </td>
     </tr>
 <?php
@@ -37,3 +39,44 @@ $re="";
 ?>
 </tbody>
 </table>
+<input id="deleteall" type="submit" value="Supprimer" />
+<input type="text" id="finalchecks" style="display:none;">
+<script type="text/javascript">
+    var finalchecks = "";
+    jQuery(function(){
+        $("#deleteall").hide().click(function(){
+            window.location='index.php?page=admin_coms_supprimer&id='+finalchecks+'&token=<?php echo $_SESSION["Auth"]["token"]; ?>';
+        });
+        $(".comcheck").click(function(){
+            if($(this).attr("checked")!="checked"){
+                finalchecks = finalchecks.replace($(this).attr("value")+";","");
+                $("#checkall").removeAttr('checked');
+            }else{
+                finalchecks += $(this).attr("value")+";";
+                if($('.comcheck:not(:checked)').length==0)
+                    $("#checkall").attr('checked','checked');
+            }
+            $("#finalchecks").val(finalchecks);
+            if(finalchecks!="")
+                $("#deleteall").slideDown();
+            else
+                $("#deleteall").slideUp();
+        });
+    });
+    function checkAll(){
+        if($('.comcheck:not(:checked)').length==0){
+            $(".comcheck").removeAttr('checked');
+            finalchecks="";
+            $("#deleteall").slideUp();
+        }
+        else{
+            $("#deleteall").slideDown();
+            $(".comcheck").attr('checked','checked');
+            finalchecks = "";
+            $(".comcheck").each(function(){
+                finalchecks += $(this).attr("value")+";";
+            });
+        }
+        $("#finalchecks").val(finalchecks);
+    }
+</script>

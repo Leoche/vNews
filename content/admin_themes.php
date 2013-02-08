@@ -85,6 +85,7 @@ if(isset($_POST)){
 			if($r == $z['theme']){
 			echo '<div class="boutton-block">
 				      <div class="boutton valide" id="theme">
+				       <div class="icon big">p</div>
 				       <div class="icon-action">'.$edi.$del.'</div>
 				      </div>
 				      <span>'.$r.'</span>
@@ -93,6 +94,7 @@ if(isset($_POST)){
 			else{
 			echo '<div class="boutton-block">
 				      <div class="boutton" id="theme">
+				       <div class="icon big">p</div>
 				       <div class="icon-action"><a href="javascript:$(\'input[name=validtheme]\').val(\''.$r.'\');$(\'#changetheme\').submit();" class="valid"></a>'.$edi.$del.'</div>
 				      </div>
 				      <span>'.$r.'</span>
