@@ -10,6 +10,13 @@ if(is_writable("content/")){
 echo "</tr>";
 
 echo "<tr>";
+	echo '<td>Création du dossier "content/private/"<td/>';
+if(is_dir("content/private")||mkdir("content/private")){
+	echo '<td><img src="css/images/valid.png"/></td>';
+}else{$is_ok = false;echo '<td><img src="css/images/delete.png"/></td>';}
+echo "</tr>";
+
+echo "<tr>";
 	echo '<td>Le dossier "content/private/" est-il accessible en écriture<td/>';
 if(is_writable("content/private")){
 	echo '<td><img src="css/images/valid.png"/></td>';
