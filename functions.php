@@ -312,15 +312,15 @@ return $folder;
 
 function verifVersion(){
     ob_start();
-    echo substr(file_get_contents("http://www.leoche.org/assets/vnews/lastversion"),-3);
+    echo substr(file_get_contents("http://www.leoche.me/assets/vnews/lastversion"),-3);
     $curversion = ob_get_contents();
     ob_end_clean();
     if(getVersion()){
     if(intval(substr($curversion,-1))>intval(substr(getVersion(),-1))){
-        return "Votre version est obselète, vNews v".$curversion." est disponible sur Leoche.org.";
+        return "Votre version est obselète, vNews v".$curversion." est disponible sur leoche.me.";
     }
     if(intval(substr($curversion,-1))<intval(substr(getVersion(),-1))){
-        return "Votre version est une Bêta, si vous rencontrez un bogue informez en moi sur Leoche.org.";
+        return "Votre version est une Bêta, si vous rencontrez un bogue informez en moi sur leoche.me.";
     }
     else{return 1;}
     }

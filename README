@@ -5,7 +5,7 @@ vNews
 vNews est un système de gestion de news facile développé en PHP. Il vous permet de créer du contenu facilement et rapidement. Personnalisable et flexible, il peut être utilisé pour un graphisme sur un site. Nomade ce système n'a nul besoin de base de données pour fonctionner.
 
 Version: 0.5
-Infos: http://www.leoche.org/vnews
+Infos: http://www.leoche.me/vnews
 
 
 
@@ -134,6 +134,6 @@ include(“vNews/news.php”);
 ### Quels droits a-t’on sur vNews?
 
 
-vNews est gratuit au téléchargement ainsi qu’à l’utilisation. Cependant vNews souscrit à la license de creative commons CC BY-NC 2.0 (cf: http://creativecommons.org ). En résumé, l’utilisation est autorisée seulement pour des fins non commerciales, toutes modifications sont autorisées mais Leoche.org se réserve le droit paternité de vNews.
+vNews est gratuit au téléchargement ainsi qu’à l’utilisation. Cependant vNews souscrit à la license de creative commons CC BY-NC 2.0 (cf: http://creativecommons.org ). En résumé, l’utilisation est autorisée seulement pour des fins non commerciales, toutes modifications sont autorisées mais leoche.me se réserve le droit paternité de vNews.
 
 

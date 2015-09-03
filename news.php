@@ -80,7 +80,7 @@ foreach($data as $id=>$n){
 		}
 	}
 		else{
-			$comstemplatee = "Aucun commentaires, soyez le premier &agrave; en poster!";
+			$comstemplatee = "Aucun commentaire, soyez le premier &agrave; en poster!";
 		}
 		$titre=$n['titre'];
 		$commentaires = '
